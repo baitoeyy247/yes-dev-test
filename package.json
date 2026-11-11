@@ -1,0 +1,20 @@
+{
+  "name": "luma-skin",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test tests/*.js",
+    "samples": "node --disable-warning=ExperimentalWarning sample-data/generate.js"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "express": "^4.21.2",
+    "multer": "^2.5.0",
+    "qrcode": "^1.5.4"
+  }
+}
