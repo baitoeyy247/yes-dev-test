@@ -1,0 +1,40 @@
+#แผนการทำงานพัฒนาระบบ QR สินค้า Luma Skin
+
+##1. Flow การทำงาน
+ิ 1. Super Admin เข้าสู่ระบบ
+ 2. Super Admin สามารถส่งคำเชิญอีเมลให้ Admin ใหม่ผ่านเมล บันทึกอีเมลลงlog
+ 3. Admin อัปโหลดไฟล์สินค้า ระบบตรวจสอบความถูกต้องของข้อมูล
+ 4. สร้างข้อมูลสินค้าและสร้าง QR Code ให้สินค้าแต่ละชิ้น
+ 5. ลูกค้าสแกน QR Code บนสินค้า แล้วเห็นหน้าเว็บข้อมูลสินค้า
+ 6. ทดสอบการนำเข้าไฟล์สินค้า เพื่อทดสอบการอัปเดตข้อมูลสินค้าเดิมและเพิ่มสินค้าใหม่
+
+ ##2. โครงสร้างฐานข้อมูล
+  - เก็บข้อมูลผู้ดูแลระบบ
+    - id (PK)
+    - name (string)
+    - email (string)
+    - password (string)
+    - role (Enum 'Super Admin','Admin')
+  - เก็บข้อมูลสินค้า 
+    - id (PK)
+    - sku (string , รูปแบบ LS-0000)
+    - name (string)
+    - category (string: Cleanser, Toner, Serum, Moisturizer, Sunscreen หรือ Mask)
+    - price (decimal, >0)
+    - size (string)
+    - description (dtring)
+    - how_to_use (dtring)
+    - status (string, 'active', 'inactive', default ' active ')
+  - เก็บสถิติการสแกน QR Code
+    - id (PK)
+    - product_id (FK)
+    - scanned_at (timestamp)
+    - ip_address (string)
+    - user_agent (text)
+
+##3. ลำดับงานและเวลาโดยประมาณ
+  - 00.00 - 00.30 เขียน PLAN.md แล้ว Push ขึ้น GitHup 
+  - 00.30 - 01.30 เซ็ตอัพโปรเจกต์ ฐานข้อมูล seed Super Admin และทำระบบ login
+  - 01.30 - 03.00 พัฒนาระบบ Import Excel , ระบบจัดการสินค้า/สร้าง QR Code
+  - 03.00 - 03.30 ทำหน้าเว็บไซต์ ระบบบันทึก log การสแกน และทดสอบการอัปเดตไฟล์
+  - 03.30 - 04.00 ทดสอบภาพรวมระบบ
